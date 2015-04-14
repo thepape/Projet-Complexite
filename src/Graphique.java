@@ -226,7 +226,8 @@ public class Graphique extends JPanel {
 		    	//System.out.println(x1+" "+y1+" "+x2+" "+y2);
 		    }
 		    
-		  //courbe de rapprochement de k(n)
+		  //courbe de f(x)=(x.(x-1))/4
+		    /*
 		    g.setColor(Color.darkGray);
 		    g.drawString("n(n-1)/4", margeX+300, this.getHeight()-margeY+35);
 		    for(int i = 1; i < donnees.data.length; i++)
@@ -241,15 +242,10 @@ public class Graphique extends JPanel {
 		    	int iy1 = -Math.round(y1)+this.getHeight()-margeY;
 		    	int ix2 = Math.round(x2)+margeX;
 		    	int iy2 = -Math.round(y2)+this.getHeight()-margeY;
-		    	/*
-		    	if(iy2 < margeY)
-		    	{
-		    		break;
-		    	}*/
-		    	g.drawLine(ix1,iy1,ix2,iy2);
-		    	//System.out.println(x1+" "+y1+" "+x2+" "+y2);
+		    	
+		    	g.drawLine(ix1,iy1,ix2,iy2);//System.out.println(x1+" "+y1+" "+x2+" "+y2);
 		    }
-		    
+		    */
 		    g.setColor(Color.BLACK);
 			  
 			    //origine 0,0
