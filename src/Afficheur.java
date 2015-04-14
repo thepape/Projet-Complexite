@@ -11,12 +11,12 @@ public class Afficheur
 	 * constructeur d'un afficheur de graphique
 	 * @param data tableau de donnees a representer dans le graphique
 	 */
-	public Afficheur(Tableau donnees)
+	public Afficheur(Tableau donnees, boolean fitOnX,String title,String labelY)
 	{
-		fenetre = new JFrame("This isn't even my final form!");
+		fenetre = new JFrame(title);
 		fenetre.setSize(700, 700);
 		
-		Graphique pane = new Graphique(donnees, 700,700);
+		Graphique pane = new Graphique(donnees, 700,700, fitOnX, labelY);
 		fenetre.setContentPane(pane);
 		
 		fenetre.setResizable(false);

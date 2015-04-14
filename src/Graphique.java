@@ -39,42 +39,45 @@ public class Graphique extends JPanel {
 	 */
 	private int margeX=50;
 	
+	private String labelY;
+	
 	/**
 	 * constructeur d'un graphique
 	 * @param d tableau de donnees
 	 * @param dx hauteur du JPanel en pixels
 	 * @param dy largeur du JPanel en pixels
 	 */
-	public Graphique(Tableau t, int dx, int dy)
+	public Graphique(Tableau t, int dx, int dy, boolean fitOnX, String labelY)
 	{
 		super();
 		this.donnees = t;
-		this.maxx=donnees.data.length-1;
-		//this.maxy=Math.round(d[d.length-1]+1);
-		this.maxy=donnees.data.length-1;
+		if(!fitOnX)
+		{
+			this.maxx=(int) donnees.data.length-1;
+			this.maxy = (int) donnees.data[donnees.data.length-1];
+		}
+		else
+		{
+			this.maxx=donnees.data.length-1;
+			//this.maxy=Math.round(d[d.length-1]+1);
+			this.maxy=donnees.data.length-1;
+		}
+		
 		this.echelleX = (float) maxx / ((float)(dx-this.margeX*2));
 		this.echelleY = ((float) maxy) / ((float) (dy-this.margeY*2));
 		this.setSize(dx, dy);
 		this.setBackground(Color.white);
+		this.labelY = labelY;
 	}
 	
 	 public void paintComponent(Graphics g)
 	 {
-		    
-		    //axes
+		 g.setColor(Color.BLACK);
+		  //axes
 		    g.drawLine(margeX, this.getHeight()-margeY, this.getWidth()-margeX, this.getHeight()-margeY);
 		    g.drawLine(margeY, this.getHeight()-margeY, margeX, margeY);
 		    
-		    //origine 0,0
-		    g.drawString("0", margeX, this.getHeight()-margeY+20);
-		    g.drawString("0", margeX-20, this.getHeight()-margeY);
 		    
-		    //n sur axe x et y
-		    g.drawString(""+maxx,this.getWidth()-margeX, this.getHeight()-margeY+20);
-		    g.drawString(""+maxy, margeX-35, margeY+10);
-		    
-		    g.drawString("t(ms)", margeX, margeY-2);
-		    g.drawString("n", this.getWidth()-margeX+5, this.getHeight()-margeY);
 		    
 		    //courbe des donnees
 		    g.setColor(Color.RED);
@@ -174,6 +177,91 @@ public class Graphique extends JPanel {
 		    }
 		    
 		  
+		  //courbe de f(x)=x.x
+		    g.setColor(Color.MAGENTA);
+		    g.drawString("n²", margeX+200, this.getHeight()-margeY+35);
+		    for(int i = 1; i < donnees.data.length; i++)
+		    {
+		    	
+		    	float x1 = ((float) i-1) / echelleX;
+		    	float y1 = ((float) Math.pow(i-1,2)) / echelleY;
+		    	float x2 = ((float) i) / echelleX;
+		    	float y2 = ((float) Math.pow(i,2)) / echelleY;
+		    	
+		    	int ix1 = Math.round(x1)+margeX;
+		    	int iy1 = -Math.round(y1)+this.getHeight()-margeY;
+		    	int ix2 = Math.round(x2)+margeX;
+		    	int iy2 = -Math.round(y2)+this.getHeight()-margeY;
+		    	/*
+		    	if(iy2 < margeY)
+		    	{
+		    		break;
+		    	}*/
+		    	g.drawLine(ix1,iy1,ix2,iy2);
+		    	//System.out.println(x1+" "+y1+" "+x2+" "+y2);
+		    }
 		    
+		    
+		  //courbe de f(x)=(x.(x-1))/2
+		    g.setColor(new Color(0,147,3));
+		    g.drawString("n.(n-1)/2", margeX+250, this.getHeight()-margeY+35);
+		    for(int i = 1; i < donnees.data.length; i++)
+		    {
+		    	
+		    	float x1 = ((float) i-1) / echelleX;
+		    	float y1 = ((float) ((i-1)*(i-2))/2) / echelleY;
+		    	float x2 = ((float) i) / echelleX;
+		    	float y2 = ((float) ((i)*(i-1))/2) / echelleY;
+		    	
+		    	int ix1 = Math.round(x1)+margeX;
+		    	int iy1 = -Math.round(y1)+this.getHeight()-margeY;
+		    	int ix2 = Math.round(x2)+margeX;
+		    	int iy2 = -Math.round(y2)+this.getHeight()-margeY;
+		    	/*
+		    	if(iy2 < margeY)
+		    	{
+		    		break;
+		    	}*/
+		    	g.drawLine(ix1,iy1,ix2,iy2);
+		    	//System.out.println(x1+" "+y1+" "+x2+" "+y2);
+		    }
+		    
+		  //courbe de rapprochement de k(n)
+		    g.setColor(Color.darkGray);
+		    g.drawString("n(n-1)/4", margeX+300, this.getHeight()-margeY+35);
+		    for(int i = 1; i < donnees.data.length; i++)
+		    {
+		    	
+		    	float x1 = ((float) i-1) / echelleX;
+		    	float y1 = ((float) ((i-1)*(i-2))/4) / echelleY;
+		    	float x2 = ((float) i) / echelleX;
+		    	float y2 = ((float) ((i)*(i-1))/4) / echelleY;
+		    	
+		    	int ix1 = Math.round(x1)+margeX;
+		    	int iy1 = -Math.round(y1)+this.getHeight()-margeY;
+		    	int ix2 = Math.round(x2)+margeX;
+		    	int iy2 = -Math.round(y2)+this.getHeight()-margeY;
+		    	/*
+		    	if(iy2 < margeY)
+		    	{
+		    		break;
+		    	}*/
+		    	g.drawLine(ix1,iy1,ix2,iy2);
+		    	//System.out.println(x1+" "+y1+" "+x2+" "+y2);
+		    }
+		    
+		    g.setColor(Color.BLACK);
+			  
+			    //origine 0,0
+			    g.drawString("0", margeX, this.getHeight()-margeY+20);
+			    g.drawString("0", margeX-20, this.getHeight()-margeY);
+			    
+			    //n sur axe x et y
+			    g.drawString(""+maxx,this.getWidth()-margeX, this.getHeight()-margeY+20);
+			    g.drawString(""+maxy, margeX-35, margeY+10);
+			    
+			    g.drawString(labelY, margeX, margeY-2);
+			    g.drawString("n", this.getWidth()-margeX+5, this.getHeight()-margeY);
+		   
 	 }   
 }
