@@ -55,6 +55,11 @@ public class Main {
 		return k;
 	}
 	
+	/**
+	 * algorithme de detection d'intersection "ToutesLespaires" avec un affichage de progression en pourcent
+	 * @param t tableau de rectangles
+	 * @return nombres de paires de rectangles differentes qui se coupent
+	 */
 	public static int ToutesLesPairesAvecProgression(Rectangle[] t)
 	{
 		//int n = 0;
@@ -396,6 +401,11 @@ public class Main {
 		return new Tableau(res, pas);
 	}
 	
+	/**
+	 * execute ToutesLesPaires puis Balayage pour un ensemble de n rectangles
+	 * @param jeu numero du jeu de test a generer
+	 * @param n nombre de rectangles
+	 */
 	public static void comparerTemps(int jeu, int n)
 	{
 		Rectangle[] tjeu = null;

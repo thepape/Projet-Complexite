@@ -39,6 +39,9 @@ public class Graphique extends JPanel {
 	 */
 	private int margeX=50;
 	
+	/**
+	 * label texte a placer au bout de l'axe Y
+	 */
 	private String labelY;
 	
 	/**
@@ -46,6 +49,8 @@ public class Graphique extends JPanel {
 	 * @param d tableau de donnees
 	 * @param dx hauteur du JPanel en pixels
 	 * @param dy largeur du JPanel en pixels
+	 * @param fitOnX si a true, l'echelle du graphique sera de 1/1. Sinon, elle sera de maxY/maxX
+	 * @param labelY label texte a afficher au bout de l'axe Y
 	 */
 	public Graphique(Tableau t, int dx, int dy, boolean fitOnX, String labelY)
 	{

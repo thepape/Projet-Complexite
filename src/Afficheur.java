@@ -20,6 +20,7 @@ public class Afficheur
 		fenetre.setContentPane(pane);
 		
 		fenetre.setResizable(false);
+		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	/**
